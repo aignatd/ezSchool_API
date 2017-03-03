@@ -1,0 +1,79 @@
+{
+  "Database" :
+  {
+    "strMongoDB" : "mongodb://localhost:27017/",
+    "strSchema"  : "ezhelper"
+  },
+  "Server" :
+  {
+    "IPAddr2" : "192.168.137.1",
+    "IPAddr1" : "192.168.191.2",
+    "IPAddr"  : "192.168.16.2",
+    "IPAddr4" : "192.168.30.40",
+    "IPAddr3" : "172.19.1.71",
+    "Port"    : "31013",
+    "Koneksi" : "http://"
+  },
+  "Pesan" :
+  {
+    "strError"  		  : "error",
+    "strKonekDBSukses"    : "Successfully connected to the database",
+    "strTidakAda"		  : "Not Found",
+    "strLoginSalah"		  : "Data akun salah",
+    "strLoginGagal"		  : "Proses login gagal",
+    "strLoginSukses"	  : "Proses login berhasil",
+    "strAkunAda"	      : "Data akun sudah ada",
+    "strRegisGagal"		  : "Proses registrasi gagal",
+    "strRegisSukses"	  : "Proses registrasi berhasil",
+    "strStatusLogin"	  : "Login",
+    "strDataProfile"	  : "Kosong",
+    "strLogoutSalah"	  : "Proses logout salah",
+    "strLogoutGagal"	  : "Proses logout gagal",
+    "strLogoutSukses"	  : "Proses logout berhasil",
+    "strStatusLogout"	  : "Logout",
+    "strProfileUpdate"	  : "Update",
+    "strProfileGagal"	  : "Update profile gagal",
+    "strProfileSukses"    : "Update profile berhasil",
+    "strPasswordGagal"    : "Rubah password gagal",
+    "strPasswordSukses"   : "Rubah password berhasil",
+    "strUploadGagal"      : "Upload file gagal",
+    "strUploadSukses"     : "Upload file berhasil",
+    "strDownloadSukses"   : "Download profile berhasil",
+    "strMuridSukses"      : "Download profile murid berhasil",
+    "strWaliSukses"       : "Download profile wali berhasil",
+    "strGuruSukses"       : "Download profile guru berhasil",
+    "strPhotoGagal"       : "Download photo gagal",
+    "strPhotoSukses"      : "Download photo berhasil",
+    "strPSBGagal"         : "Data murid baru gagal",
+    "strPSBKosong"        : "Data murid baru kosong",
+    "strPSBSukses"        : "Data murid baru ada"
+  },
+  "Kode" :
+  {
+    "Sukses"  : "0",
+    "Gagal"  	: "-1"
+  },
+  "Komponen" :
+  {
+    "Murid" : "Murid",
+    "Guru"  : "Guru",
+    "Wali"  : "Orang tua / Wali Murid"
+  },
+  "RouterAPIV1" :
+  {
+    "users"    : "/api/v1/users",
+    "devices"  : "/api/v1/devices",
+    "murid"    : "/api/v1/murid",
+    "guru"     : "/api/v1/guru",
+    "wali"     : "/api/v1/wali"
+  },
+  "PhotoLink" :
+  {
+    "Profile"   : "/PhotoProfile/",
+    "SiswaBaru" : "/PhotoSiswaBaru/"
+  },
+  "PhotoDir" :
+  {
+    "Profile"    : "./tampung/photo/profile/"
+  }
+}

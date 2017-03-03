@@ -1,0 +1,136 @@
+a
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+a:visited
+{
+   color: #800080;
+}
+a:active
+{
+   color: #FF0000;
+}
+a:hover
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+h1
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 32px;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h2
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 27px;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h3
+{
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 24px;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h4
+{
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 21px;
+   font-style: italic;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h5
+{
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 19px;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h6
+{
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 16px;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+.GrayBackground
+{
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: #000000;
+   background-color: rgba(0,0,0,0.50);
+   -webkit-transition-property: background-color;
+   -moz-transition-property: background-color;
+   transition-property: background-color;
+   -webkit-transition-duration: 500ms;
+   -moz-transition-duration: 500ms;
+   transition-duration: 500ms;
+   -webkit-transition-delay: 0ms;
+   -moz-transition-delay: 0ms;
+   transition-delay: 0ms;
+   -webkit-transition-timing-function: linear;
+   -moz-transition-timing-function: linear;
+   transition-timing-function: linear;
+}
+.NoBackground
+{
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: transparent;
+   -webkit-transition-property: background-color;
+   -moz-transition-property: background-color;
+   transition-property: background-color;
+   -webkit-transition-duration: 500ms;
+   -moz-transition-duration: 500ms;
+   transition-duration: 500ms;
+   -webkit-transition-delay: 0ms;
+   -moz-transition-delay: 0ms;
+   transition-delay: 0ms;
+   -webkit-transition-timing-function: linear;
+   -moz-transition-timing-function: linear;
+   transition-timing-function: linear;
+   background-color: transparant;
+}
