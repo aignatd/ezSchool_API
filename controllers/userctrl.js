@@ -350,9 +350,6 @@ var PhotoProfile = function(req, res)
         }
         else
         {
-//          var datafile = {"PhotoURL" : fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
-//                                 fixvalue.RouterAPIV1.users + fixvalue.PhotoLink.Profile + fixkomponen + "/" + filephoto};
-
           var datafile = {"Photo" : filephoto};
 
           UserModel.UpdateUserRecord({"_id" : datuser[0]["_id"]}, datafile, function(err, resUser)

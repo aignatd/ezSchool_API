@@ -130,8 +130,6 @@ var ListDataMurid =
       else
       {
         res.status(200);
-        datamurid["PhotoURL"] = req["PhotoURL"];
-        datamurid["Photo"] = req["Photo"];
         res.json(Fungsi.ListPSB(datamurid));
       }
     });

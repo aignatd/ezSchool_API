@@ -76,9 +76,17 @@ module.exports =
 	  else
     if(res["Profile"] === strPesan.strProfileUpdate)
     {
-      var PhotoProfile = res["PhotoURL"];
       var strKomponen = res["Komponen"];
       var strHandphone = res["Handphone"];
+      var fixkomponen;
+
+      if(strKomponen === fixvalue.Komponen.Wali)
+        fixkomponen = "Orangtua";
+      else
+        fixkomponen = strKomponen;
+
+      var PhotoProfile = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
+                         fixvalue.RouterAPIV1.users + fixvalue.PhotoLink.Profile + fixkomponen + "/" + res["Photo"];
 
       varProfile = {"Profile" : res["Profile"], "LoginID" : res["LoginID"], "Nama" : res["Nama"], "Email" : res["Email"],
         "Handphone" : strHandphone, "Komponen" : strKomponen, "PhotoURL" : PhotoProfile};
@@ -100,6 +108,7 @@ module.exports =
     {
       var strKomponen = res["Komponen"];
       var strHandphone = res["Handphone"];
+      var fixkomponen;
 
       var profile = {"Email" : res["Email"]};
       profile["Handphone"] = strHandphone;
@@ -108,7 +117,15 @@ module.exports =
       profile["Komponen"] = strKomponen;
       profile["LoginID"] = res["LoginID"];
       profile["Nama"] = res["Nama"];
-      profile["PhotoURL"] = res["PhotoURL"];
+      profile["Photo"] = res["Photo"];
+
+      if(strKomponen === fixvalue.Komponen.Wali)
+        fixkomponen = "Orangtua";
+      else
+        fixkomponen = strKomponen;
+
+      profile["PhotoURL"] = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
+                            fixvalue.RouterAPIV1.users + fixvalue.PhotoLink.Profile + fixkomponen + "/" + res["Photo"];
 
       strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strDownloadSukses}, "UserResponse"	:	profile};
     }
