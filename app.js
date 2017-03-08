@@ -55,6 +55,7 @@ app.use(function(err, req, res, next)
 });
 
 // Connect to mongoose
+mongoose.Promise = global.Promise;
 mongoose.connect(fixvalue.Database.strMongoDB + fixvalue.Database.strSchema, function (err, db)
 {
   if(err)

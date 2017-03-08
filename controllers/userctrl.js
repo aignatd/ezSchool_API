@@ -91,7 +91,7 @@ var LogoutUser = function(req, res)
 
 	UserModel.AllUserRecord(data, function (err, count)
 	{
-		if (err)
+		if ((err) || (count === null))
 		{
 			res.status(202);
 			res.json(Fungsi.LogoutGagal());
@@ -123,12 +123,10 @@ var LogoutUser = function(req, res)
 var ProfileUser = function(req, res)
 {
   var ParamID = req.body["ParamID"];
-	var Profile = {"Handphone" : req.body["CariProfile"]};
-	Profile["KodeDevice"] = req.body["KodeDevice"];
 
-	UserModel.AllUserRecord(Profile, function (err, user)
+	UserModel.AllUserRecord(req.body, function (err, user)
 	{
-		if (err)
+		if ((err) || (user === null))
 		{
 			res.status(202);
 			res.json(Fungsi.ProfileKosong());
@@ -137,28 +135,38 @@ var ProfileUser = function(req, res)
 		{
 			if(user.length === 0)
 			{
-				res.status(202);
+				res.status(201);
 				res.json(Fungsi.ProfileKosong());
 			}
 			else
 			{
-			  if(ParamID === 0)
+			  if((ParamID === 0) || (ParamID === 1))
         {
+          var strKomponen = user["Komponen"];
+          var fixkomponen;
+
+          if(strKomponen === fixvalue.Komponen.Wali)
+            fixkomponen = "Orangtua";
+          else
+            fixkomponen = strKomponen;
+
+          user["PhotoURL"] = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
+            fixvalue.RouterAPIV1.users + fixvalue.PhotoLink.Profile + fixkomponen + "/" + user["Photo"];
+
           res.status(200);
-          res.json(Fungsi.ProfileUpdate(user[0]));
-        }
-			  else
-        if(ParamID === 1)
-        {
-          res.status(200);
-          res.json(Fungsi.ProfileData(user[0], 0));
+
+          if(ParamID === 0)
+            res.json(Fungsi.ProfileUpdate(user));
+          else
+          if(ParamID === 1)
+            res.json(Fungsi.ProfileData(user, 0));
         }
         else
         if(ParamID === 2)
         {
           var DataReq = req.body;
 
-          DataReq["DataCari"] = user[0]["_id"];
+          DataReq["DataCari"] = user["_id"];
           muridctrl.postListDataMurid(DataReq, res);
         }
 			}
@@ -182,7 +190,7 @@ var RubahProfile = function(req, res)
 
 	UserModel.AllUserRecord(cekuser, function (err, user)
 	{
-		if (err)
+		if ((err) || (user === null))
 		{
 			res.status(202);
 			res.json(Fungsi.ProfileGagal());
@@ -285,7 +293,7 @@ var RubahPassword = function(req, res)
 
   UserModel.AllUserRecord(Profile, function (err, user)
   {
-    if (err)
+    if ((err) || (user === null))
     {
       res.status(202);
       res.json(Fungsi.PasswordGagal());
@@ -301,7 +309,7 @@ var RubahPassword = function(req, res)
       {
         var Rubah = {"Password" : req.body["DataUser"]["Passbaru"]};
 
-        UserModel.UpdateUserRecord({"_id" : user[0]["_id"]}, Rubah, function (err, user)
+        UserModel.UpdateUserRecord({"_id" : user["_id"]}, Rubah, function (err, user)
         {
           if (err)
           {
@@ -335,15 +343,15 @@ var PhotoProfile = function(req, res)
 
       var Komponen = req.body["Komponen"];
 
-      UserModel.AllUserRecord(CekUser, function (err, datuser)
+      UserModel.AllUserRecord(CekUser, function (err, datauser)
       {
-        if (err)
+        if ((err) || (datauser === null))
         {
           res.status(202);
           res.json(Fungsi.UploadGagal());
         }
         else
-        if (datuser.length === 0)
+        if (datauser.length === 0)
         {
           res.status(201);
           res.json(Fungsi.UploadGagal());
@@ -352,7 +360,7 @@ var PhotoProfile = function(req, res)
         {
           var datafile = {"Photo" : filephoto};
 
-          UserModel.UpdateUserRecord({"_id" : datuser[0]["_id"]}, datafile, function(err, resUser)
+          UserModel.UpdateUserRecord({"_id" : datauser["_id"]}, datafile, function(err, resUser)
           {
             if(err)
             {
@@ -373,9 +381,9 @@ var PhotoProfile = function(req, res)
 
 var AmbilPhotoProfile = function(req, res)
 {
-  var filesource = fixvalue.PhotoDir.Profile + req.params.Komponen + "/" + req.params.Handphone;
+  var filesource = fixvalue.PhotoDir.Profile + req.params.Komponen + "/" + req.params.Photo;
 
-  res.download(filesource, req.params.Handphone, function (err)
+  res.download(filesource, req.params.Photo, function (err)
   {
     if(err)
     {

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var devicectrl = require('./../controllers/devicectrl');
 var userctrl = require('./../controllers/userctrl');
+var fixvalue = require('./../utils/fixvalue.json')
 
 router.get('', function(req, res)
 {
@@ -31,8 +32,9 @@ router.post('/password', userctrl.postRubahPassword);
 router.post('/upload', userctrl.postPhotoProfile);
 
 /* API untuk download photo user di profile - Input data user berupa nomor handphone dan device id */
-router.post('/download', userctrl.getProfileUser);
+//router.post('/download', userctrl.getProfileUser);
 
-router.get('/PhotoProfile/:Komponen/:Handphone', userctrl.getPhotoProfile);
+/* API untuk view photo user di profile - Input data user berupa nomor handphone dan device id */
+router.get('/PhotoProfile/:Komponen/:Photo', userctrl.getPhotoProfile);
 
 module.exports = router;

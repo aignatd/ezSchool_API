@@ -5,11 +5,11 @@
 var mongoose = require('mongoose');
 var deviceschema = new mongoose.Schema(
 	{
-		Nama			  :   {type: String, require: true},
-		DeviceID    :   {type: String, require: true},
-		DeviceType  :   {type: String, require: true},
-		DeviceOS    :   {type: String, require: true},
-		Keterangan  :   {type: String, require: true}
+		Nama			  : {type: String, require: true},
+		DeviceID    : {type: String, require: true},
+		DeviceType  : {type: String, require: true},
+		DeviceOS    : {type: String, require: true},
+		Keterangan  : {type: String, require: true}
 	});
 
 var devicemodel = module.exports = mongoose.model("device", deviceschema);
@@ -17,7 +17,7 @@ var devicemodel = module.exports = mongoose.model("device", deviceschema);
 module.exports.AllDeviceRecord =
 	function (data, callback)
 	{
-		devicemodel.find(data, callback);
+		devicemodel.findOne(data, callback);
 	};
 
 module.exports.AddDeviceRecord =

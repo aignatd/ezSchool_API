@@ -75,22 +75,7 @@ module.exports =
       varProfile = {"Profile" : res["Profile"]};
 	  else
     if(res["Profile"] === strPesan.strProfileUpdate)
-    {
-      var strKomponen = res["Komponen"];
-      var strHandphone = res["Handphone"];
-      var fixkomponen;
-
-      if(strKomponen === fixvalue.Komponen.Wali)
-        fixkomponen = "Orangtua";
-      else
-        fixkomponen = strKomponen;
-
-      var PhotoProfile = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
-                         fixvalue.RouterAPIV1.users + fixvalue.PhotoLink.Profile + fixkomponen + "/" + res["Photo"];
-
-      varProfile = {"Profile" : res["Profile"], "LoginID" : res["LoginID"], "Nama" : res["Nama"], "Email" : res["Email"],
-        "Handphone" : strHandphone, "Komponen" : strKomponen, "PhotoURL" : PhotoProfile};
-    }
+      varProfile = res;
 
 		strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strProfileSukses},
 							 "UserResponse"	:	varProfile};
@@ -105,30 +90,7 @@ module.exports =
   ProfileData	:	function(res, pilihan)
   {
     if(pilihan === 0)
-    {
-      var strKomponen = res["Komponen"];
-      var strHandphone = res["Handphone"];
-      var fixkomponen;
-
-      var profile = {"Email" : res["Email"]};
-      profile["Handphone"] = strHandphone;
-      profile["Profile"] = res["Profile"];
-      profile["IdxKomponen"] = res["IdxKomponen"];
-      profile["Komponen"] = strKomponen;
-      profile["LoginID"] = res["LoginID"];
-      profile["Nama"] = res["Nama"];
-      profile["Photo"] = res["Photo"];
-
-      if(strKomponen === fixvalue.Komponen.Wali)
-        fixkomponen = "Orangtua";
-      else
-        fixkomponen = strKomponen;
-
-      profile["PhotoURL"] = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
-                            fixvalue.RouterAPIV1.users + fixvalue.PhotoLink.Profile + fixkomponen + "/" + res["Photo"];
-
-      strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strDownloadSukses}, "UserResponse"	:	profile};
-    }
+      strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strDownloadSukses}, "UserResponse"	:	res};
     else
     if(pilihan === 1)
       strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strWaliSukses}, "WaliResponse"	:	res};
@@ -173,27 +135,17 @@ module.exports =
   },
   PSBKosong	:	function()
   {
-    strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Gagal, "Pesan"	:	strPesan.strPSBKosong},
-               "SiswaBaru" : []};
+    strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Gagal, "Pesan"	:	strPesan.strPSBKosong}, "SiswaBaru" : [{}]};
     return strJSON;
   },
   PSBGagal	:	function()
   {
-    strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Gagal, "Pesan"	:	strPesan.strPSBGagal},
-               "SiswaBaru" : []};
+    strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Gagal, "Pesan"	:	strPesan.strPSBGagal}, "SiswaBaru" : [{}]};
     return strJSON;
   },
-  ListPSB	:	function(res)
+  PSBSukses	:	function(res)
   {
-    var PhotoProfile = res["PhotoURL"];
-    var FilePhoto = res["Photo"];
-
-    console.log(res);
-
-    res["PhotoSiswaBaru"] = PhotoProfile + "/" + FilePhoto;
-
-    strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strPSBSukses},
-               "SiswaBaru" : res};
+    strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strPSBSukses}, "MuridResponse" : res};
     return strJSON;
   }
 }

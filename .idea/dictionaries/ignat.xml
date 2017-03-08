@@ -5,6 +5,7 @@
       <w>agama</w>
       <w>alamat</w>
       <w>ambil</w>
+      <w>anda</w>
       <w>balikan</w>
       <w>baru</w>
       <w>berhasil</w>
@@ -19,6 +20,7 @@
       <w>datacount</w>
       <w>dataguru</w>
       <w>datamurid</w>
+      <w>dataurl</w>
       <w>datauser</w>
       <w>datawali</w>
       <w>datuser</w>
@@ -42,6 +44,7 @@
       <w>gurumodel</w>
       <w>guruschema</w>
       <w>handphone</w>
+      <w>hasil</w>
       <w>jabatan</w>
       <w>jeniskelamin</w>
       <w>kecamatan</w>
@@ -55,20 +58,26 @@
       <w>koneksi</w>
       <w>kosong</w>
       <w>kota</w>
+      <w>modemtemp</w>
       <w>multer</w>
       <w>murid</w>
       <w>muridctrl</w>
+      <w>muridmodel</w>
       <w>murids</w>
       <w>nama</w>
       <w>namafile</w>
       <w>namaguru</w>
+      <w>namasiswa</w>
+      <w>nomor</w>
       <w>notelp</w>
       <w>orang</w>
       <w>orangtua</w>
       <w>pekerjaan</w>
       <w>pendidikanterakhir</w>
       <w>pesan</w>
+      <w>pilihan</w>
       <w>pisah</w>
+      <w>profileuser</w>
       <w>propinsi</w>
       <w>registrasi</w>
       <w>rubah</w>
@@ -76,6 +85,7 @@
       <w>sdkmulter</w>
       <w>seks</w>
       <w>siswa</w>
+      <w>siswaschema</w>
       <w>storagemulter</w>
       <w>storagprofile</w>
       <w>sukses</w>
@@ -84,14 +94,19 @@
       <w>telpon</w>
       <w>tgllahir</w>
       <w>tidak</w>
+      <w>tipekomponen</w>
       <w>tmptlahir</w>
       <w>upsert</w>
+      <w>urlmodel</w>
+      <w>urlprofileuser</w>
+      <w>urlschema</w>
       <w>userctrl</w>
       <w>userdata</w>
       <w>userid</w>
       <w>usermodel</w>
       <w>userschema</w>
       <w>varcount</w>
+      <w>virtuals</w>
       <w>wali</w>
       <w>walictrl</w>
       <w>walimodel</w>

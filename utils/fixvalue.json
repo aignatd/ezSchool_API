@@ -8,7 +8,7 @@
   {
     "IPAddr2" : "192.168.137.1",
     "IPAddr1" : "192.168.191.2",
-    "IPAddr"  : "192.168.16.2",
+    "IPAddr"  : "192.168.199.2",
     "IPAddr4" : "192.168.30.40",
     "IPAddr3" : "172.19.1.71",
     "Port"    : "31013",
@@ -46,7 +46,8 @@
     "strPhotoSukses"      : "Download photo berhasil",
     "strPSBGagal"         : "Data murid baru gagal",
     "strPSBKosong"        : "Data murid baru kosong",
-    "strPSBSukses"        : "Data murid baru ada"
+    "strPSBSukses"        : "Data murid baru berhasil",
+    "strSchemaGagal"      : "Gagal"
   },
   "Kode" :
   {
@@ -74,6 +75,7 @@
   },
   "PhotoDir" :
   {
-    "Profile"    : "./tampung/photo/profile/"
+    "Profile"   : "./tampung/photo/profile/",
+    "SiswaBaru" : "./tampung/photo/siswabaru/"
   }
 }

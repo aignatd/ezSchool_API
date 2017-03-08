@@ -12,7 +12,7 @@ var WaliProfile =
 
     WaliModel.AllWaliRecord(NoHP, function (err, datawali)
     {
-      if (err)
+      if((err) || (datawali === null))
       {
         res.status(202);
         res.json(Fungsi.ProfileKosong());
@@ -26,7 +26,7 @@ var WaliProfile =
       else
       {
         res.status(200);
-        res.json(Fungsi.ProfileData(datawali[0], 1));
+        res.json(Fungsi.ProfileData(datawali, 1));
       }
     });
   };

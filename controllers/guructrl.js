@@ -12,7 +12,7 @@ var GuruProfile =
 
     GuruModel.AllGuruRecord(NoHP, function (err, dataguru)
     {
-      if (err)
+      if ((err) || (dataguru === null))
       {
         res.status(202);
         res.json(Fungsi.ProfileKosong());
@@ -26,7 +26,7 @@ var GuruProfile =
       else
       {
         res.status(200);
-        res.json(Fungsi.ProfileData(dataguru[0], 2));
+        res.json(Fungsi.ProfileData(dataguru, 2));
       }
     });
   };
@@ -46,15 +46,14 @@ var GuruRecord =
 
     GuruModel.AllGuruRecord(cekNIG, function (err, user)
     {
-      if (err || (user.length === 0))
+      if (err || (user.length === 0) || (user === null))
       {
         res.status(200);
         res.json(Fungsi.ProfileSukses());
       }
       else
       {
-
-        GuruModel.UpdateGuruRecord({"_id" : user[0]["_id"]}, dataguru, function(err, guru)
+        GuruModel.UpdateGuruRecord({"_id" : user["_id"]}, dataguru, function(err, guru)
         {
           if(err)
           {

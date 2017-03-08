@@ -14,7 +14,7 @@ var AllDevice = function(req, res)
 
 	DeviceModel.AllDeviceRecord(data, function (err, device)
 	{
-		if(err)
+		if((err) || (device === null))
 		{
 			res.status(202);
 			res.json(Fungsi.LoginSalah());

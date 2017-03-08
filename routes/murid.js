@@ -9,6 +9,8 @@ var muridctrl = require('./../controllers/muridctrl');
 router.post('/profile', muridctrl.postMuridProfile);
 router.post('/update', muridctrl.postMuridRecord);
 router.post('/list', muridctrl.postListDataMurid);
-//router.get('/PhotoSiswaBaru/:Handphone/:idxSiswaBaru', muridctrl.getPhotoSiswaBaru);
+
+/* API untuk view photo murid baru - Input data user berupa nomor handphone dan device id */
+router.get('/PhotoSiswaBaru/:Handphone/:Photo', muridctrl.getPhotoSiswaBaru);
 
 module.exports = router;

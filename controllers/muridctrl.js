@@ -4,6 +4,7 @@
 
 var MuridModel = require('./../models/muridmodel');
 var Fungsi = require('./../utils/fungsi');
+var fixvalue = require('./../utils/fixvalue.json');
 
 var MuridProfile =
   function(req, res)
@@ -12,7 +13,7 @@ var MuridProfile =
 
     MuridModel.AllMuridRecord(NoHP, function (err, datamurid)
     {
-      if (err)
+      if ((err) || (datamurid === null))
       {
         res.status(202);
         res.json(Fungsi.ProfileKosong());
@@ -26,7 +27,7 @@ var MuridProfile =
       else
       {
         res.status(200);
-        res.json(Fungsi.ProfileData(datamurid[0], 3));
+        res.json(Fungsi.ProfileData(datamurid, 3));
       }
     });
   };
@@ -46,14 +47,14 @@ var MuridRecord =
 
     MuridModel.AllMuridRecord(cekNIS, function (err, user)
     {
-      if(err || (datamurid.length === 0))
+      if(err || (datamurid.length === 0) || (user === null))
       {
         res.status(200);
         res.json(Fungsi.ProfileSukses());
       }
       else
       {
-        MuridModel.UpdateMuridRecord({"_id" : user[0]["_id"]}, datamurid, function(err, murid)
+        MuridModel.UpdateMuridRecord({"_id" : user["_id"]}, datamurid, function(err, murid)
         {
           if(err)
           {
@@ -77,7 +78,7 @@ var DataFileMurid =
 
     MuridModel.AllMuridRecord(NoHP, function (err, datamurid)
     {
-      if (err)
+      if ((err) || (datamurid === null))
       {
         res.status(202);
         res.json(Fungsi.UploadGagal());
@@ -92,7 +93,7 @@ var DataFileMurid =
       {
         var datafile = {"Photo" : namafile};
 
-        MuridModel.UpdateMuridRecord({"_id" : datamurid[0]["_id"]}, datafile, function(err, murid)
+        MuridModel.UpdateMuridRecord({"_id" : datamurid["_id"]}, datafile, function(err, murid)
         {
           if(err)
           {
@@ -112,11 +113,13 @@ var DataFileMurid =
 var ListDataMurid =
   function(req, res)
   {
+    console.log(req);
     var DataReq = {"UserID" : req["DataCari"]};
+    var DataProfile = req["CariProfile"];
 
-    MuridModel.AllMuridRecord(DataReq, function (err, datamurid)
+    MuridModel.MuridBaruRecord(DataReq, function (err, datamurid)
     {
-      if (err)
+      if ((err) || (datamurid === null))
       {
         res.status(202);
         res.json(Fungsi.PSBGagal());
@@ -129,10 +132,31 @@ var ListDataMurid =
       }
       else
       {
+        datamurid.forEach(function(ListMurid)
+        {
+          ListMurid["PhotoURL"] = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
+            fixvalue.RouterAPIV1.murid + fixvalue.PhotoLink.SiswaBaru + DataProfile + "/" + ListMurid["Photo"];
+        });
+
         res.status(200);
-        res.json(Fungsi.ListPSB(datamurid));
+        res.json(Fungsi.PSBSukses(datamurid));
       }
     });
   };
 
-module.exports = {postMuridProfile : MuridProfile, postMuridRecord : MuridRecord, postListDataMurid : ListDataMurid};
+var AmbilPhotoSiswaBaru = function(req, res)
+{
+  var filesource = fixvalue.PhotoDir.SiswaBaru + req.params.Handphone + "/" + req.params.Photo;
+
+  res.download(filesource, req.params.Handphone, function (err)
+  {
+    if(err)
+    {
+      res.status(202);
+      res.json(Fungsi.PhotoGagal());
+    }
+  });
+}
+
+module.exports = {postMuridProfile : MuridProfile, postMuridRecord : MuridRecord, postListDataMurid : ListDataMurid,
+                  getPhotoSiswaBaru : AmbilPhotoSiswaBaru};
