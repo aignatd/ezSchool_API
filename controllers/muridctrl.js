@@ -3,6 +3,7 @@
  */
 
 var MuridModel = require('./../models/muridmodel');
+var WaliModel = require('./../models/walimodel');
 var Fungsi = require('./../utils/fungsi');
 var fixvalue = require('./../utils/fixvalue.json');
 
@@ -71,51 +72,13 @@ var MuridRecord =
     });
 	};
 
-var DataFileMurid =
-  function(req, res, namafile)
-  {
-    var NoHP = {"NOTELP" : req.body["Handphone"]};
-
-    MuridModel.AllMuridRecord(NoHP, function (err, datamurid)
-    {
-      if ((err) || (datamurid === null))
-      {
-        res.status(202);
-        res.json(Fungsi.UploadGagal());
-      }
-      else
-      if (datamurid.length === 0)
-      {
-        res.status(201);
-        res.json(Fungsi.UploadGagal());
-      }
-      else
-      {
-        var datafile = {"Photo" : namafile};
-
-        MuridModel.UpdateMuridRecord({"_id" : datamurid["_id"]}, datafile, function(err, murid)
-        {
-          if(err)
-          {
-            res.status(202);
-            res.json(Fungsi.UploadGagal());
-          }
-          else
-          {
-            res.status(200);
-            res.json(Fungsi.UploadSukses());
-          }
-        });
-      }
-    });
-  };
-
 var ListDataMurid =
   function(req, res)
   {
-    console.log(req);
-    var DataReq = {"UserID" : req["DataCari"]};
-    var DataProfile = req["CariProfile"];
+    var Tampung = req.body;
+    var DataReq = {"UserID" : Tampung["DataCari"]};
+    var DataProfile = Tampung["CariProfile"];
+    var JSONMurid;
 
     MuridModel.MuridBaruRecord(DataReq, function (err, datamurid)
     {
@@ -134,12 +97,36 @@ var ListDataMurid =
       {
         datamurid.forEach(function(ListMurid)
         {
-          ListMurid["PhotoURL"] = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
+          ListMurid[fixvalue.PhotoLink.PhotoURL] = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
             fixvalue.RouterAPIV1.murid + fixvalue.PhotoLink.SiswaBaru + DataProfile + "/" + ListMurid["Photo"];
         });
 
-        res.status(200);
-        res.json(Fungsi.PSBSukses(datamurid));
+        JSONMurid = {"MuridResponse" : datamurid};
+        DataProfile = {"NOTELP" : Tampung["CariProfile"]};
+        var NoHP = Tampung["CariProfile"];
+
+        WaliModel.DataPhotoURLWali(DataProfile, function (err, datawali)
+        {
+          if ((err) || (datawali === null))
+          {
+            res.status(202);
+            res.json(Fungsi.PSBGagal());
+          }
+          else
+          if (datawali.length === 0)
+          {
+            res.status(201);
+            res.json(Fungsi.PSBKosong());
+          }
+          else
+          {
+            res.status(200);
+            datawali[fixvalue.PhotoLink.PhotoURL] = fixvalue.Server.Koneksi + fixvalue.Server.IPAddr + ":" + fixvalue.Server.Port +
+              fixvalue.RouterAPIV1.wali + fixvalue.PhotoLink.PhotoWali + NoHP + "/" + datawali["Photo"];
+            JSONMurid["WaliResponse"] = datawali;
+            res.json(Fungsi.PSBSukses(JSONMurid));
+          }
+        });
       }
     });
   };

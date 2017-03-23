@@ -44,15 +44,15 @@ var AllUser = function(req, res, next)
 {
 	var data = req.body["DataUser"];
 
-	UserModel.CountUserRecord(data, function (err, count)
+	UserModel.AllUserHandle(data, function (err, count)
 	{
-		if(err)
+		if((err) || (count === null))
 		{
 			res.status(202);
 			res.json(Fungsi.LoginGagal());
 		}
 		else
-		if (!count)
+		if (count.length === 0)
 		{
 			res.status(201);
 			res.json(Fungsi.LoginSalah());
@@ -89,7 +89,7 @@ var LogoutUser = function(req, res)
 {
 	var data = req.body["DataUser"];
 
-	UserModel.AllUserRecord(data, function (err, count)
+	UserModel.AllUserHandle(data, function (err, count)
 	{
 		if ((err) || (count === null))
 		{
@@ -114,13 +114,16 @@ var LogoutUser = function(req, res)
 					res.json(Fungsi.LogoutGagal());
 				}
 				else
-					res.json(Fungsi.LogoutSukses());
+				{
+          res.status(200);
+          res.json(Fungsi.LogoutSukses());
+        }
 			});
 		}
 	});
 };
 
-var ProfileUser = function(req, res)
+var ProfileUser = function(req, res, next)
 {
   var ParamID = req.body["ParamID"];
 
@@ -164,10 +167,8 @@ var ProfileUser = function(req, res)
         else
         if(ParamID === 2)
         {
-          var DataReq = req.body;
-
-          DataReq["DataCari"] = user["_id"];
-          muridctrl.postListDataMurid(DataReq, res);
+          req.body["DataCari"] = user["_id"];
+          return next();
         }
 			}
 		}
@@ -188,7 +189,7 @@ var RubahProfile = function(req, res)
 	var Komponen = req.body["DataUser"]["Komponen"];
 	var NamaUser = req.body["DataUser"]["Nama"];
 
-	UserModel.AllUserRecord(cekuser, function (err, user)
+	UserModel.AllUserHandle(cekuser, function (err, user)
 	{
 		if ((err) || (user === null))
 		{
@@ -235,7 +236,7 @@ var RubahProfile = function(req, res)
 			}
 			else
 			{
-				var StatProfile = user[0]["Profile"];
+				var StatProfile = user["Profile"];
 				var Update;
 
         if(StatProfile === "Kosong")
@@ -251,7 +252,7 @@ var RubahProfile = function(req, res)
           Update = {"Nama" : datauser["Nama"]};
 
 
-        UserModel.UpdateUserRecord({"_id" : user[0]["_id"]}, Update, function(err, userdata)
+        UserModel.UpdateUserRecord({"_id" : user["_id"]}, Update, function(err, userdata)
         {
           if(err)
           {
@@ -291,7 +292,7 @@ var RubahPassword = function(req, res)
   Profile["Password"] = req.body["DataUser"]["Password"];
   Profile["KodeDevice"] = req.body["DataDevice"]["DeviceID"];
 
-  UserModel.AllUserRecord(Profile, function (err, user)
+  UserModel.AllUserHandle(Profile, function (err, user)
   {
     if ((err) || (user === null))
     {
@@ -302,7 +303,7 @@ var RubahPassword = function(req, res)
     {
       if(user.length === 0)
       {
-        res.status(202);
+        res.status(201);
         res.json(Fungsi.PasswordGagal());
       }
       else

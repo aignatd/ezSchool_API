@@ -32,6 +32,13 @@ var walischema = new mongoose.Schema(
 		EMAIL	 							: {type: String, require: true},
 		NOTELP							: {type: String, require: true},
     UserID							: {type: String, require: true}
+  }, {toJSON: {virtuals: true}});
+
+walischema.virtual('PhotoURL',
+  {
+    ref           : 'wali', // The model to use
+    localField    : '_id', // Find people where `localField`
+    foreignField  : 'PhotoURL' // is equal to `foreignField`
   });
 
 var walimodel = mongoose.model("wali", walischema);
@@ -39,7 +46,7 @@ var walimodel = mongoose.model("wali", walischema);
 module.exports.AllWaliRecord =
 	function (datawali, callback)
 	{
-		walimodel.findOne(datawali, callback);
+		walimodel.findOne(datawali, "-_id -__v", callback);
 	};
 
 module.exports.AddWaliRecord =
@@ -59,3 +66,9 @@ module.exports.UpdateWaliRecord =
 	{
 		walimodel.findOneAndUpdate(datawali, update, {upsert : true}, callback);
 	};
+
+module.exports.DataPhotoURLWali =
+  function (datawali, callback)
+  {
+    walimodel.findOne(datawali, "-__v").populate('PhotoURL').exec(callback);
+  };

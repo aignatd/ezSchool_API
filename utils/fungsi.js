@@ -145,7 +145,7 @@ module.exports =
   },
   PSBSukses	:	function(res)
   {
-    strJSON = {"CoreResponse" : {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strPSBSukses}, "MuridResponse" : res};
-    return strJSON;
+    res["CoreResponse"] = {"Kode"	:	strResponID.Sukses, "Pesan"	:	strPesan.strPSBSukses};
+    return res;
   }
 }

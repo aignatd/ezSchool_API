@@ -62,3 +62,9 @@ module.exports.UpdateUserRecord =
 	{
 		usermodel.findOneAndUpdate(user, update, {upsert : true, returnNewDocument : true}, callback);
 	};
+
+module.exports.AllUserHandle =
+  function (data, callback)
+  {
+    usermodel.findOne(data, '-__v', callback);
+  };

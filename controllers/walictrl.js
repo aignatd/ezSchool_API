@@ -4,6 +4,7 @@
 
 var WaliModel = require('./../models/walimodel');
 var Fungsi = require('./../utils/fungsi');
+var fixvalue = require('./../utils/fixvalue.json');
 
 var WaliProfile =
   function(req, res)
@@ -59,4 +60,19 @@ var WaliRecord =
 		});
 	};
 
-module.exports = {postWaliProfile : WaliProfile, postWaliRecord : WaliRecord};
+
+var PhotoWali = function(req, res)
+{
+  var filesource = fixvalue.PhotoDir.PhotoWali + req.params.Handphone + "/" + req.params.Photo;
+
+  res.download(filesource, req.params.Handphone, function (err)
+  {
+    if(err)
+    {
+      res.status(202);
+      res.json(Fungsi.PhotoGagal());
+    }
+  });
+}
+
+module.exports = {postWaliProfile : WaliProfile, postWaliRecord : WaliRecord, getPhotoWali : PhotoWali};

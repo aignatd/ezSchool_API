@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var devicectrl = require('./../controllers/devicectrl');
 var userctrl = require('./../controllers/userctrl');
-var fixvalue = require('./../utils/fixvalue.json')
+var muridctrl = require('./../controllers/muridctrl');
 
 router.get('', function(req, res)
 {
@@ -20,7 +20,7 @@ router.post('/registrasi', userctrl.postUserRecord, devicectrl.postDeviceRecord)
 router.post('/logout', userctrl.getLogoutUser);
 
 /* API untuk ambil data profile - Cek Info Device dan Nama User */
-router.post('/profile', userctrl.getProfileUser);
+router.post('/profile', userctrl.getProfileUser, muridctrl.postListDataMurid);
 
 /* API untuk update data murid, guru, wali dan user - Input data murid, guru, wali dan user */
 router.post('/rubah', userctrl.postRubahProfile);

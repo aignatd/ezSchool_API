@@ -8,8 +8,8 @@
   {
     "IPAddr2" : "192.168.137.1",
     "IPAddr1" : "192.168.191.2",
-    "IPAddr"  : "192.168.199.2",
-    "IPAddr4" : "192.168.30.40",
+    "IPAddr4" : "192.168.199.2",
+    "IPAddr"  : "192.168.30.17",
     "IPAddr3" : "172.19.1.71",
     "Port"    : "31013",
     "Koneksi" : "http://"
@@ -51,14 +51,14 @@
   },
   "Kode" :
   {
-    "Sukses"  : "0",
-    "Gagal"  	: "-1"
+    "Sukses" : "0",
+    "Gagal"  : "-1"
   },
   "Komponen" :
   {
-    "Murid" : "Murid",
+    "Murid" : "Siswa",
     "Guru"  : "Guru",
-    "Wali"  : "Orang tua / Wali Murid"
+    "Wali"  : "Orang tua / Wali Siswa"
   },
   "RouterAPIV1" :
   {
@@ -71,11 +71,14 @@
   "PhotoLink" :
   {
     "Profile"   : "/PhotoProfile/",
-    "SiswaBaru" : "/PhotoSiswaBaru/"
+    "SiswaBaru" : "/PhotoSiswaBaru/",
+    "PhotoWali" : "/PhotoWali/",
+    "PhotoURL"  : "PhotoURL"
   },
   "PhotoDir" :
   {
     "Profile"   : "./tampung/photo/profile/",
-    "SiswaBaru" : "./tampung/photo/siswabaru/"
+    "SiswaBaru" : "./tampung/photo/siswabaru/",
+    "PhotoWali" : "./tampung/photo/dokumen/wali/"
   }
 }
